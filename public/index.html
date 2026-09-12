@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="AI Integration & MCP Gateway Studio by Ashok Kumar Manohar — enterprise tool integration, workflow orchestration, policy and traceability demo." />
+  <title>AI Integration & MCP Gateway Studio</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="AI Integration Studio home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span><strong>Integration Studio</strong><small>MCP Gateway · Railway</small></span>
+      </a>
+      <nav>
+        <a class="nav-link active" href="#overview">Overview</a>
+        <a class="nav-link" href="#architecture">Architecture</a>
+        <a class="nav-link" href="#tools">Tool Registry</a>
+        <a class="nav-link" href="#workflow">Workflow Runner</a>
+        <a class="nav-link" href="#policy">Policy Engine</a>
+        <a class="nav-link" href="#contracts">Contract Lab</a>
+        <a class="nav-link" href="#traces">Trace Explorer</a>
+      </nav>
+      <div class="profile-card">
+        <div class="avatar">AK</div>
+        <div><strong>Ashok Kumar Manohar</strong><small>AI Quality · FDE · Agentic AI</small></div>
+      </div>
+    </aside>
+
+    <main id="top">
+      <header class="topbar">
+        <div><span class="eyebrow">ENTERPRISE AI INTEGRATION</span><h1>AI Integration & MCP Gateway Studio</h1></div>
+        <div class="top-actions"><span class="live"><i></i> Gateway healthy</span><a class="ghost-btn" href="/health" target="_blank">Health API</a></div>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <span class="pill">Railway Edition · No API keys required</span>
+          <h2>Turn enterprise systems into <em>governed AI tools.</em></h2>
+          <p>Design, validate and simulate the integration layer between AI agents and real enterprise systems. Demonstrate tool contracts, authorization, workflow orchestration, audit traces and production quality gates from one interactive control plane.</p>
+          <div class="hero-actions"><a class="primary-btn" href="#workflow">Run a workflow</a><a class="secondary-btn" href="#architecture">Explore architecture</a></div>
+        </div>
+        <div class="hero-visual">
+          <div class="gateway-card">
+            <div class="gateway-head"><span>AI Agent / Copilot</span><b>01</b></div>
+            <div class="flow-line"></div>
+            <div class="gateway-core"><span class="pulse"></span><strong>MCP / API Gateway</strong><small>AUTH · POLICY · CONTRACT · TRACE</small></div>
+            <div class="flow-split"><span></span><span></span><span></span></div>
+            <div class="mini-nodes"><span>CRM</span><span>RAG</span><span>CI/CD</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics" id="metrics">
+        <article><span>Connected systems</span><strong id="metricConnectors">—</strong><small>enterprise adapters</small></article>
+        <article><span>Gateway tools</span><strong id="metricTools">—</strong><small>scoped capabilities</small></article>
+        <article><span>Success rate</span><strong id="metricSuccess">—</strong><small>simulated production SLI</small></article>
+        <article><span>P95 gateway</span><strong id="metricLatency">—</strong><small>end-to-end latency</small></article>
+        <article><span>Policy coverage</span><strong id="metricPolicy">—</strong><small>governed tool calls</small></article>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section-head"><div><span class="eyebrow">REFERENCE ARCHITECTURE</span><h3>Enterprise agent integration plane</h3></div><p>Separate reasoning from action. Every tool call crosses identity, authorization, schema and audit controls before touching a customer system.</p></div>
+        <div class="architecture">
+          <div class="arch-column"><small>EXPERIENCE</small><div class="arch-card strong">AI Assistant</div><div class="arch-card">Agent Runtime</div></div>
+          <div class="arrow">→</div>
+          <div class="arch-column gateway"><small>CONTROL PLANE</small><div class="arch-card accent">MCP / API Gateway</div><div class="arch-stack"><span>Identity</span><span>RBAC</span><span>Contract</span><span>Policy</span><span>Trace</span></div></div>
+          <div class="arrow">→</div>
+          <div class="arch-column wide"><small>ENTERPRISE SYSTEMS</small><div class="system-grid" id="systemGrid"></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="tools">
+        <div class="section-head"><div><span class="eyebrow">MCP-STYLE TOOL REGISTRY</span><h3>Capabilities exposed with explicit contracts</h3></div><a class="text-link" href="/api/mcp/manifest" target="_blank">View manifest →</a></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Tool</th><th>Connector</th><th>Required scope</th><th>Risk</th><th>P95</th></tr></thead><tbody id="toolRows"></tbody></table>
+        </div>
+      </section>
+
+      <section class="section split-section" id="workflow">
+        <div class="panel interactive-panel">
+          <div class="panel-head"><div><span class="eyebrow">WORKFLOW ORCHESTRATOR</span><h3>Run an enterprise tool chain</h3></div><span class="tag">Interactive</span></div>
+          <label>Workflow<select id="workflowSelect"></select></label>
+          <label>Failure injection<select id="failureSelect"><option value="none">No failure — healthy run</option><option value="timeout">Tool timeout</option><option value="auth">Authentication failure</option><option value="schema">Schema contract failure</option></select></label>
+          <button class="primary-btn full" id="runWorkflow">Execute workflow</button>
+          <div class="hint">Each execution generates a deterministic trace, quality gate and release decision.</div>
+        </div>
+        <div class="panel result-panel">
+          <div class="panel-head"><div><span class="eyebrow">EXECUTION TRACE</span><h3 id="traceTitle">Ready to run</h3></div><span class="status neutral" id="traceStatus">IDLE</span></div>
+          <div class="trace" id="traceSteps"><div class="empty">Choose a workflow and execute it to inspect tool-by-tool evidence.</div></div>
+          <div class="gate-box" id="gateBox"><strong>Release gate</strong><span>Awaiting execution</span></div>
+        </div>
+      </section>
+
+      <section class="section split-section" id="policy">
+        <div class="panel interactive-panel">
+          <div class="panel-head"><div><span class="eyebrow">ZERO-TRUST TOOL ACCESS</span><h3>Policy engine</h3></div><span class="tag">RBAC</span></div>
+          <label>Tool<select id="policyTool"></select></label>
+          <div class="form-grid"><label>Role<select id="policyRole"><option>Developer</option><option>Release Manager</option><option>Viewer</option></select></label><label>Environment<select id="policyEnvironment"><option>staging</option><option>production</option></select></label></div>
+          <label class="check"><input type="checkbox" id="policySensitive" /> Request contains sensitive customer data</label>
+          <button class="secondary-btn full" id="evaluatePolicy">Evaluate access</button>
+        </div>
+        <div class="panel policy-result" id="policyResult">
+          <span class="eyebrow">POLICY DECISION</span><div class="decision neutral">NOT EVALUATED</div><p>Evaluate a tool call to see least-privilege, environment and human-approval controls applied.</p>
+        </div>
+      </section>
+
+      <section class="section split-section" id="contracts">
+        <div class="panel interactive-panel">
+          <div class="panel-head"><div><span class="eyebrow">CONTRACT QUALITY</span><h3>Tool contract validator</h3></div><span class="tag">QE Gate</span></div>
+          <label>Tool name<input id="contractTool" value="customer.lookup" /></label>
+          <label>Required input fields<input id="contractFields" value="customerId" placeholder="customerId, region" /></label>
+          <label>Timeout (ms)<input id="contractTimeout" type="number" value="1500" min="0" /></label>
+          <button class="secondary-btn full" id="validateContract">Validate contract</button>
+        </div>
+        <div class="panel score-panel" id="contractResult">
+          <span class="eyebrow">GATEWAY READINESS</span><div class="score-ring"><strong>—</strong><small>/100</small></div><p>Validate a contract to calculate its readiness score.</p>
+        </div>
+      </section>
+
+      <section class="section" id="traces">
+        <div class="section-head"><div><span class="eyebrow">OBSERVABILITY</span><h3>Recent governed executions</h3></div><p>Every action is attributable: workflow, tools, policy decision, duration and outcome.</p></div>
+        <div class="trace-cards" id="traceCards"></div>
+      </section>
+
+      <section class="cta">
+        <div><span class="eyebrow">FORWARD DEPLOYED AI ENGINEERING</span><h3>Design the solution. Integrate the enterprise. Govern every action.</h3><p>This studio demonstrates the integration layer that turns an AI proof-of-concept into a controllable enterprise system.</p></div>
+        <a class="primary-btn" href="#top">Back to top</a>
+      </section>
+
+      <footer><div><strong>Ashok Kumar Manohar</strong><span>Test Architect · AI Quality Engineer · Forward Deployed AI Engineer</span></div><div>Agentic AI · MCP · RAG Evaluation · Playwright · API Automation · CI/CD</div></footer>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
