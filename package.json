@@ -1,0 +1,12 @@
+{
+  "name": "ai-integration-mcp-gateway-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Recruiter-facing enterprise AI integration, MCP gateway and workflow orchestration studio",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
