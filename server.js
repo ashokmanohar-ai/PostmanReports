@@ -100,6 +100,23 @@ function serveFile(res, file) {
   });
 }
 
+function resolveStaticPath(pathname) {
+  const raw = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
+  const requested = path.normalize(path.join(publicDir, raw));
+  if (!requested.startsWith(publicDir)) return null;
+
+  if (fs.existsSync(requested)) {
+    const stat = fs.statSync(requested);
+    if (stat.isFile()) return requested;
+    if (stat.isDirectory()) {
+      const indexFile = path.join(requested, 'index.html');
+      if (fs.existsSync(indexFile) && fs.statSync(indexFile).isFile()) return indexFile;
+    }
+  }
+
+  return null;
+}
+
 function policyDecision(payload) {
   const role = String(payload.role || 'Developer');
   const environment = String(payload.environment || 'staging').toLowerCase();
@@ -222,11 +239,10 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/robots.txt') return sendText(res, 200, 'User-agent: *\nAllow: /\n');
     if (pathname === '/favicon.ico') return sendText(res, 204, '');
 
-    const safePath = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
-    const resolved = path.normalize(path.join(publicDir, safePath));
-    if (!resolved.startsWith(publicDir)) return sendText(res, 403, 'Forbidden');
-    if (fs.existsSync(resolved) && fs.statSync(resolved).isFile()) return serveFile(res, resolved);
-    return serveFile(res, path.join(publicDir, 'index.html'));
+    const resolved = resolveStaticPath(pathname);
+    if (resolved) return serveFile(res, resolved);
+
+    return sendText(res, 404, 'Not found');
   } catch (error) {
     return sendJson(res, 400, { error: error.message || 'Request failed' });
   }
